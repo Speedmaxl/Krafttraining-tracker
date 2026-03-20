@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Krafttraining Tracker</title>
+  <style>
+    :root { --bg:#f3f4f6; --card:#fff; --text:#1f2937; --muted:#6b7280; --line:#e5e7eb; --accent:#2563eb; --accent-2:#1d4ed8; --danger:#dc2626; --ok:#059669; --ok-bg:#ecfdf5; --warn:#b45309; --warn-bg:#fffbeb; --shadow:0 10px 25px rgba(0,0,0,.08); --radius:18px; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+    .wrap { max-width:760px; margin:0 auto; padding:16px 14px 96px; }
+    .hero,.card,.history-item,.toolbar { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .hero { padding:18px; margin-bottom:14px; }
+    h1 { margin:0 0 6px; font-size:1.5rem; }
+    .sub { color:var(--muted); font-size:.95rem; line-height:1.4; }
+    .toolbar { padding:14px; margin-bottom:14px; display:grid; gap:12px; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    label { display:block; font-size:.85rem; color:var(--muted); margin-bottom:6px; font-weight:600; }
+    input,button { font:inherit; }
+    input[type="date"], input[type="number"], input[type="text"] { width:100%; border:1px solid var(--line); border-radius:14px; padding:12px 13px; background:#fff; color:var(--text); }
+    input.compact { padding:10px 11px; }
+    .buttons { display:flex; flex-wrap:wrap; gap:8px; }
+    button { border:0; border-radius:14px; padding:11px 14px; font-weight:700; cursor:pointer; }
+    .primary { background:var(--accent); color:white; }
+    .primary:active { background:var(--accent-2); }
+    .secondary { background:#eef2ff; color:#3730a3; }
+    .ghost { background:#f9fafb; color:var(--text); border:1px solid var(--line); }
+    .danger { background:#fef2f2; color:var(--danger); }
+    .exercise-list { display:grid; gap:12px; }
+    .card { padding:14px; }
+    .card-head { display:flex; justify-content:space-between; gap:12px; align-items:start; margin-bottom:10px; }
+    .title { font-size:1.05rem; font-weight:800; line-height:1.2; margin:0; }
+    .meta { color:var(--muted); font-size:.83rem; line-height:1.35; }
+    .last-box { background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; padding:10px 11px; margin-bottom:10px; font-size:.9rem; }
+    .progress-box { background:var(--ok-bg); border:1px solid #a7f3d0; border-radius:14px; padding:10px 11px; margin-bottom:10px; font-size:.9rem; }
+    .progress-box.warn { background:var(--warn-bg); border-color:#fcd34d; }
+    .mini-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:10px; }
+    .mini-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:10px; }
+    .mini-card .tiny-head { font-size:.78rem; color:var(--muted); font-weight:700; margin-bottom:6px; }
+    .set-row { display:grid; grid-template-columns:72px 1fr 1fr auto; gap:8px; align-items:end; margin-bottom:8px; }
+    .set-label { font-size:.84rem; color:var(--muted); font-weight:700; padding-bottom:12px; }
+    .tiny { font-size:.8rem; color:var(--muted); }
+    .section-title { margin:18px 4px 10px; font-size:1rem; font-weight:800; }
+    .history { display:grid; gap:10px; margin-top:10px; }
+    .history-item { padding:12px 14px; }
+    .history-date { font-size:1rem; font-weight:800; margin-bottom:8px; }
+    .history-line { font-size:.92rem; margin:3px 0; line-height:1.4; }
+    .footer-note { margin-top:16px; color:var(--muted); font-size:.85rem; line-height:1.45; text-align:center; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#eff6ff; color:#1d4ed8; font-size:.75rem; font-weight:800; margin-top:4px; }
+    .segmented { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+    .segmented button { flex:1; min-width:84px; padding:10px 12px; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; }
+    .segmented button.active { background:#dbeafe; color:#1d4ed8; border-color:#93c5fd; }
+    .quick-row { display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:10px; align-items:center; }
+    .quick-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .muted-block { color:var(--muted); font-size:.86rem; margin-top:4px; line-height:1.4; }
+    @media (max-width:560px) { .row { grid-template-columns:1fr; } .set-row { grid-template-columns:58px 1fr 1fr auto; } button { width:100%; } .buttons { display:grid; } .card-head { flex-direction:column; } .mini-grid { grid-template-columns:1fr; } .quick-row { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Krafttraining Tracker</h1>
+      <div class="sub">iPhone-optimierte Offline-Web-App für Ihr Training. Jetzt mit weniger Tipparbeit, Spezialfeldern für Klimmzüge und Situps sowie automatischer Progress-Anzeige.</div>
+      <div class="pill">Tipp: In Safari teilen → „Zum Home-Bildschirm“</div>
+    </div>
+
+    <div class="toolbar">
+      <div class="row">
+        <div><label for="workoutDate">Datum</label><input id="workoutDate" type="date" /></div>
+        <div><label for="sessionNote">Einheitsnotiz</label><input id="sessionNote" type="text" placeholder="z. B. müde / stark / kurze Pausen" /></div>
+      </div>
+      <div class="buttons">
+        <button class="primary" id="saveWorkoutBtn">Training speichern</button>
+        <button class="secondary" id="copyWholeLastBtn">Ganze letzte Einheit übernehmen</button>
+        <button class="secondary" id="resetWorkoutBtn">Heutige Eingaben leeren</button>
+        <button class="ghost" id="exportJsonBtn">JSON exportieren</button>
+        <button class="ghost" id="exportCsvBtn">CSV exportieren</button>
+        <button class="ghost" id="importBtn">JSON importieren</button>
+        <input id="importFile" type="file" accept="application/json" hidden />
+      </div>
+    </div>
+
+    <div class="exercise-list" id="exerciseList"></div>
+    <div class="section-title">Verlauf</div>
+    <div class="history" id="history"></div>
+    <div class="footer-note">Alle Daten bleiben lokal auf diesem Gerät bzw. in diesem Browser, solange Sie sie nicht exportieren oder löschen.</div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "krafttraining_tracker_v2";
+    const exerciseTemplates = [
+      { id:"hyperextensions", name:"Hyperextensions – Swissball", type:"simple_reps" },
+      { id:"klimmzuege", name:"Klimmzüge", type:"pullups_tabs", tabs:["breit","eng"] },
+      { id:"gravityboots", name:"GravityBoots – Hanging Situps", type:"situps_fixed", fields:["gerade","links","rechts"] },
+      { id:"kh_seitheben", name:"KH-Seitheben (up-front-side-down)", type:"weighted_sets" },
+      { id:"sz_curls", name:"SZ-Curls", type:"weighted_sets" },
+      { id:"dip_machine", name:"Dip-Machine", type:"simple_reps" },
+      { id:"trizeps_druecken", name:"Trizeps-Drücken Stange", type:"weighted_sets" },
+      { id:"unterarm_curls", name:"Unterarm-Curls LH", type:"weighted_sets" },
+      { id:"kreuzheben", name:"Kreuzheben LH", type:"weighted_sets" },
+      { id:"kniebeugen", name:"Kniebeugen frei LH", type:"weighted_sets" },
+      { id:"wadenheben", name:"Wadenheben Multipresse", type:"weighted_sets" }
+    ];
+    let db = loadDb();
+    let currentWorkout = createEmptyWorkout();
+    function todayISO(){ const d=new Date(); const offset=d.getTimezoneOffset(); const local=new Date(d.getTime()-offset*60000); return local.toISOString().slice(0,10); }
+    function createExerciseState(t){
+      if(t.type==="weighted_sets") return {id:t.id,name:t.name,type:t.type,sets:[{reps:"",weight:""}]};
+      if(t.type==="simple_reps") return {id:t.id,name:t.name,type:t.type,sets:[{reps:""}]};
+      if(t.type==="pullups_tabs") return {id:t.id,name:t.name,type:t.type,activeTab:t.tabs[0],tabs:{breit:[{reps:""},{reps:""}],eng:[{reps:""},{reps:""}]}};
+      if(t.type==="situps_fixed") return {id:t.id,name:t.name,type:t.type,rounds:[{gerade:"",links:"",rechts:""}]};
+      return {id:t.id,name:t.name,type:"simple_reps",sets:[{reps:""}]};
+    }
+    function createEmptyWorkout(){ return {date:todayISO(),note:"",exercises:exerciseTemplates.map(createExerciseState)}; }
+    function loadDb(){ try{ const raw=localStorage.getItem(STORAGE_KEY); const parsed=raw?JSON.parse(raw):null; if(parsed&&Array.isArray(parsed.workouts)) return parsed; }catch(e){} return {workouts:seedWorkouts()}; }
+    function seedWorkouts(){ return [
+      { date:"2026-03-11", note:"Startdaten aus Ihren Notizen", exercises:[
+        { id:"hyperextensions", name:"Hyperextensions – Swissball", type:"simple_reps", sets:[{reps:"30"},{reps:"30"},{reps:"30"}] },
+        { id:"klimmzuege", name:"Klimmzüge", type:"pullups_tabs", tabs:{ breit:[{reps:"10"},{reps:"10"}], eng:[{reps:"8"},{reps:"8"}] } },
+        { id:"gravityboots", name:"GravityBoots – Hanging Situps", type:"situps_fixed", rounds:[{gerade:"15",links:"12",rechts:"12"},{gerade:"10",links:"",rechts:""}] },
+        { id:"kh_seitheben", name:"KH-Seitheben (up-front-side-down)", type:"weighted_sets", sets:[{reps:"10",weight:"3"},{reps:"10",weight:"6.5"},{reps:"8",weight:"6.5"}] },
+        { id:"sz_curls", name:"SZ-Curls", type:"weighted_sets", sets:[{reps:"10",weight:"27.5"},{reps:"10",weight:"32.5"},{reps:"5",weight:"37.5"}] },
+        { id:"dip_machine", name:"Dip-Machine", type:"simple_reps", sets:[{reps:"8"},{reps:"8"},{reps:"8"}] },
+        { id:"trizeps_druecken", name:"Trizeps-Drücken Stange", type:"weighted_sets", sets:[{reps:"10",weight:"20.5"},{reps:"10",weight:"25.5"},{reps:"10",weight:"25.5"}] },
+        { id:"unterarm_curls", name:"Unterarm-Curls LH", type:"weighted_sets", sets:[{reps:"10",weight:"28.5"},{reps:"10",weight:"28.5"},{reps:"10",weight:"31"}] },
+        { id:"kreuzheben", name:"Kreuzheben LH", type:"weighted_sets", sets:[{reps:"10",weight:"28.5"},{reps:"10",weight:"38.5"},{reps:"10",weight:"43.5"}] },
+        { id:"kniebeugen", name:"Kniebeugen frei LH", type:"weighted_sets", sets:[{reps:"12",weight:"28.5"},{reps:"12",weight:"48.5"},{reps:"8",weight:"53.5"}] },
+        { id:"wadenheben", name:"Wadenheben Multipresse", type:"weighted_sets", sets:[{reps:"10",weight:"70"},{reps:"10",weight:"90"},{reps:"10",weight:"90"}] }
+      ]},
+      { date:"2026-03-16", note:"Startdaten aus Ihren Notizen", exercises:[
+        { id:"hyperextensions", name:"Hyperextensions – Swissball", type:"simple_reps", sets:[{reps:"30"},{reps:"30"},{reps:"30"}] },
+        { id:"klimmzuege", name:"Klimmzüge", type:"pullups_tabs", tabs:{ breit:[{reps:"10"},{reps:"10"}], eng:[{reps:"9"},{reps:"9"}] } },
+        { id:"gravityboots", name:"GravityBoots – Hanging Situps", type:"situps_fixed", rounds:[{gerade:"15",links:"12",rechts:"12"},{gerade:"14",links:"",rechts:""}] },
+        { id:"kh_seitheben", name:"KH-Seitheben (up-front-side-down)", type:"weighted_sets", sets:[{reps:"15",weight:"3"},{reps:"10",weight:"6.5"},{reps:"10",weight:"6.5"}] },
+        { id:"sz_curls", name:"SZ-Curls", type:"weighted_sets", sets:[{reps:"12",weight:"27.5"},{reps:"10",weight:"32.5"},{reps:"10",weight:"37.5"}] },
+        { id:"dip_machine", name:"Dip-Machine", type:"simple_reps", sets:[{reps:"10"},{reps:"8"},{reps:"6"}] },
+        { id:"trizeps_druecken", name:"Trizeps-Drücken Stange", type:"weighted_sets", sets:[{reps:"15",weight:"20.5"},{reps:"10",weight:"25.5"},{reps:"10",weight:"25.5"}] },
+        { id:"unterarm_curls", name:"Unterarm-Curls LH", type:"weighted_sets", sets:[{reps:"10",weight:"28.5"},{reps:"10",weight:"28.5"},{reps:"10",weight:"31"}] }
+      ]}
+    ]; }
+    function saveDb(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); }
+    function formatDate(s){ const [y,m,d]=s.split("-"); return `${d}.${m}.${y.slice(2)}`; }
+    function escapeHtml(str=""){ return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;"); }
+    function getSavedWorkoutsSortedDesc(){ return [...db.workouts].sort((a,b)=>b.date.localeCompare(a.date)); }
+    function exerciseHasData(ex){
+      if(!ex) return false;
+      if(ex.type==="weighted_sets"||ex.type==="simple_reps") return (ex.sets||[]).some(s=>Object.values(s).some(v=>String(v||"").trim()!==""));
+      if(ex.type==="pullups_tabs") return Object.values(ex.tabs||{}).some(list=>list.some(s=>String(s.reps||"").trim()!==""));
+      if(ex.type==="situps_fixed") return (ex.rounds||[]).some(r=>Object.values(r).some(v=>String(v||"").trim()!==""));
+      return false;
+    }
+    function getLastExerciseEntry(id){ for(const workout of getSavedWorkoutsSortedDesc()){ const ex=workout.exercises.find(e=>e.id===id); if(ex&&exerciseHasData(ex)) return {date:workout.date,exercise:ex}; } return null; }
+    function getPreviousExerciseEntryBeforeDate(id,date){ for(const workout of getSavedWorkoutsSortedDesc().filter(w=>w.date<date)){ const ex=workout.exercises.find(e=>e.id===id); if(ex&&exerciseHasData(ex)) return {date:workout.date,exercise:ex}; } return null; }
+    function summarizeExercise(ex){
+      if(!ex) return "–";
+      if(ex.type==="weighted_sets") return (ex.sets||[]).filter(s=>s.reps||s.weight).map((s,i)=>`Satz ${i+1}: ${s.weight?s.weight+" kg · ":""}${s.reps?s.reps+" Wdh.":""}`).join("<br>") || "–";
+      if(ex.type==="simple_reps") return (ex.sets||[]).filter(s=>s.reps).map((s,i)=>`Satz ${i+1}: ${s.reps} Wdh.`).join("<br>") || "–";
+      if(ex.type==="pullups_tabs"){ const b=(ex.tabs?.breit||[]).map(s=>s.reps).filter(Boolean).join(" / "); const e=(ex.tabs?.eng||[]).map(s=>s.reps).filter(Boolean).join(" / "); return `Breit: ${b||"–"}<br>Eng: ${e||"–"}`; }
+      if(ex.type==="situps_fixed") return (ex.rounds||[]).map((r,i)=>`Runde ${i+1}: G ${r.gerade||"–"} · L ${r.links||"–"} · R ${r.rechts||"–"}`).join("<br>") || "–";
+      return "–";
+    }
+    function calcProgress(current, previous){
+      if(!current||!previous) return null;
+      if(current.type==="weighted_sets"&&previous.type==="weighted_sets"){
+        const curV=(current.sets||[]).reduce((sum,s)=>sum+(Number(s.weight||0)*Number(s.reps||0)),0);
+        const prevV=(previous.sets||[]).reduce((sum,s)=>sum+(Number(s.weight||0)*Number(s.reps||0)),0);
+        const curW=Math.max(0,...(current.sets||[]).map(s=>Number(s.weight||0)));
+        const prevW=Math.max(0,...(previous.sets||[]).map(s=>Number(s.weight||0)));
+        const curR=(current.sets||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        const prevR=(previous.sets||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        return {type:"weighted_sets", volumeDelta:Math.round((curV-prevV)*10)/10, bestWeightDelta:Math.round((curW-prevW)*10)/10, repsDelta:curR-prevR};
+      }
+      if(current.type==="simple_reps"&&previous.type==="simple_reps"){
+        const cur=(current.sets||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        const prev=(previous.sets||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        return {type:"simple_reps", repsDelta:cur-prev};
+      }
+      if(current.type==="pullups_tabs"&&previous.type==="pullups_tabs"){
+        const cb=(current.tabs?.breit||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        const pb=(previous.tabs?.breit||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        const ce=(current.tabs?.eng||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        const pe=(previous.tabs?.eng||[]).reduce((sum,s)=>sum+Number(s.reps||0),0);
+        return {type:"pullups_tabs", breitDelta:cb-pb, engDelta:ce-pe};
+      }
+      if(current.type==="situps_fixed"&&previous.type==="situps_fixed"){
+        const sumField=(rounds,key)=>(rounds||[]).reduce((sum,r)=>sum+Number(r[key]||0),0);
+        return {type:"situps_fixed", geradeDelta:sumField(current.rounds,"gerade")-sumField(previous.rounds,"gerade"), linksDelta:sumField(current.rounds,"links")-sumField(previous.rounds,"links"), rechtsDelta:sumField(current.rounds,"rechts")-sumField(previous.rounds,"rechts")};
+      }
+      return null;
+    }
+    function progressHtml(p){
+      if(!p) return "";
+      const parts=[]; let positive=false; const fmt=n=>(n>0?`+${n}`:String(n));
+      if(p.type==="weighted_sets"){ if(p.bestWeightDelta){ parts.push(`${fmt(p.bestWeightDelta)} kg Topgewicht`); positive=positive||p.bestWeightDelta>0; } if(p.repsDelta){ parts.push(`${fmt(p.repsDelta)} Wdh. gesamt`); positive=positive||p.repsDelta>0; } if(p.volumeDelta){ parts.push(`${fmt(p.volumeDelta)} Volumen`); positive=positive||p.volumeDelta>0; } }
+      if(p.type==="simple_reps"){ if(p.repsDelta){ parts.push(`${fmt(p.repsDelta)} Wdh. gesamt`); positive=positive||p.repsDelta>0; } }
+      if(p.type==="pullups_tabs"){ if(p.breitDelta){ parts.push(`Breit ${fmt(p.breitDelta)} Wdh.`); positive=positive||p.breitDelta>0; } if(p.engDelta){ parts.push(`Eng ${fmt(p.engDelta)} Wdh.`); positive=positive||p.engDelta>0; } }
+      if(p.type==="situps_fixed"){ if(p.geradeDelta){ parts.push(`Gerade ${fmt(p.geradeDelta)}`); positive=positive||p.geradeDelta>0; } if(p.linksDelta){ parts.push(`Links ${fmt(p.linksDelta)}`); positive=positive||p.linksDelta>0; } if(p.rechtsDelta){ parts.push(`Rechts ${fmt(p.rechtsDelta)}`); positive=positive||p.rechtsDelta>0; } }
+      if(!parts.length) return '<div class="progress-box warn">Kein Unterschied zur letzten Einheit.</div>';
+      return `<div class="progress-box ${positive ? "" : "warn"}"><strong>Progress:</strong> ${parts.join(" · ")}</div>`;
+    }
+    function renderExercises(){
+      const list=document.getElementById("exerciseList"); list.innerHTML="";
+      currentWorkout.exercises.forEach((exercise, exIndex)=>{
+        const last=getLastExerciseEntry(exercise.id);
+        const previous=getPreviousExerciseEntryBeforeDate(exercise.id, currentWorkout.date);
+        const currentProgress=previous?calcProgress(exercise, previous.exercise):null;
+        const card=document.createElement("div"); card.className="card";
+        card.innerHTML = `
+          <div class="card-head">
+            <div><div class="title">${escapeHtml(exercise.name)}</div><div class="meta">Schnellmodus mit möglichst wenig Tipparbeit.</div></div>
+            <div class="buttons" style="min-width: 180px;"><button class="secondary" data-action="copyLast" data-index="${exIndex}">Letzte Einheit übernehmen</button></div>
+          </div>
+          ${last ? `<div class="last-box"><strong>Letzte Einheit (${formatDate(last.date)}):</strong><br>${summarizeExercise(last.exercise)}</div>` : '<div class="last-box">Noch kein Eintrag vorhanden.</div>'}
+          ${progressHtml(currentProgress)}
+          <div id="body-${exIndex}"></div>`;
+        list.appendChild(card);
+        renderExerciseBody(exIndex);
+      });
+    }
+    function renderExerciseBody(exIndex){
+      const exercise=currentWorkout.exercises[exIndex]; const body=document.getElementById(`body-${exIndex}`); if(!body) return;
+      if(exercise.type==="weighted_sets") body.innerHTML=renderWeightedSets(exIndex, exercise);
+      else if(exercise.type==="simple_reps") body.innerHTML=renderSimpleReps(exIndex, exercise);
+      else if(exercise.type==="pullups_tabs") body.innerHTML=renderPullups(exIndex, exercise);
+      else if(exercise.type==="situps_fixed") body.innerHTML=renderSitups(exIndex, exercise);
+    }
+    function renderWeightedSets(exIndex, exercise){
+      const setsHtml=exercise.sets.map((set,setIndex)=>`
+        <div class="set-row">
+          <div class="set-label">Satz ${setIndex+1}</div>
+          <div><label>kg</label><input class="compact" type="number" inputmode="decimal" step="0.5" value="${escapeHtml(set.weight)}" data-field="weight" data-ex="${exIndex}" data-set="${setIndex}" data-kind="weighted_sets" placeholder="27.5" /></div>
+          <div><label>Wdh.</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(set.reps)}" data-field="reps" data-ex="${exIndex}" data-set="${setIndex}" data-kind="weighted_sets" placeholder="10" /></div>
+          <div><button class="danger" data-action="removeSet" data-ex="${exIndex}" data-set="${setIndex}">×</button></div>
+        </div>`).join("");
+      return `<div class="quick-row"><div class="muted-block">Gewicht und Wiederholungen wie bisher, aber schneller kopierbar.</div><div class="quick-actions"><button class="ghost" data-action="addSet" data-index="${exIndex}">Satz hinzufügen</button></div></div>${setsHtml}`;
+    }
+    function renderSimpleReps(exIndex, exercise){
+      const setsHtml=exercise.sets.map((set,setIndex)=>`
+        <div class="set-row">
+          <div class="set-label">Satz ${setIndex+1}</div>
+          <div><label>Wdh.</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(set.reps)}" data-field="reps" data-ex="${exIndex}" data-set="${setIndex}" data-kind="simple_reps" placeholder="10" /></div>
+          <div></div>
+          <div><button class="danger" data-action="removeSet" data-ex="${exIndex}" data-set="${setIndex}">×</button></div>
+        </div>`).join("");
+      return `<div class="quick-row"><div class="muted-block">Nur Wiederholungen, kein überflüssiges Gewichtsfeld.</div><div class="quick-actions"><button class="ghost" data-action="addSet" data-index="${exIndex}">Satz hinzufügen</button></div></div>${setsHtml}`;
+    }
+    function renderPullups(exIndex, exercise){
+      const activeTab=exercise.activeTab || "breit";
+      const tabButtons=["breit","eng"].map(tab=>`<button class="${activeTab===tab ? "active" : ""}" data-action="switchTab" data-ex="${exIndex}" data-tab="${tab}">${tab}</button>`).join("");
+      const currentTabSets=exercise.tabs[activeTab] || [];
+      const setsHtml=currentTabSets.map((set,setIndex)=>`
+        <div class="set-row">
+          <div class="set-label">Satz ${setIndex+1}</div>
+          <div><label>Wdh.</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(set.reps)}" data-field="reps" data-ex="${exIndex}" data-set="${setIndex}" data-tab="${activeTab}" data-kind="pullups_tabs" placeholder="10" /></div>
+          <div></div>
+          <div><button class="danger" data-action="removePullupSet" data-ex="${exIndex}" data-set="${setIndex}" data-tab="${activeTab}">×</button></div>
+        </div>`).join("");
+      return `<div class="segmented">${tabButtons}</div><div class="muted-block">Breit und eng getrennt. Damit sehen Sie Progress sauber pro Variante.</div><div class="buttons" style="margin:8px 0 10px;"><button class="ghost" data-action="addPullupSet" data-index="${exIndex}" data-tab="${activeTab}">Satz bei ${activeTab} hinzufügen</button></div>${setsHtml}`;
+    }
+    function renderSitups(exIndex, exercise){
+      const roundsHtml=exercise.rounds.map((round,roundIndex)=>`
+        <div class="mini-card" style="margin-bottom:10px;">
+          <div class="tiny-head">Runde ${roundIndex+1}</div>
+          <div class="mini-grid">
+            <div><label>Gerade</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(round.gerade)}" data-field="gerade" data-ex="${exIndex}" data-round="${roundIndex}" data-kind="situps_fixed" placeholder="15" /></div>
+            <div><label>Links</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(round.links)}" data-field="links" data-ex="${exIndex}" data-round="${roundIndex}" data-kind="situps_fixed" placeholder="12" /></div>
+            <div><label>Rechts</label><input class="compact" type="number" inputmode="numeric" step="1" value="${escapeHtml(round.rechts)}" data-field="rechts" data-ex="${exIndex}" data-round="${roundIndex}" data-kind="situps_fixed" placeholder="12" /></div>
+          </div>
+          <button class="danger" data-action="removeRound" data-ex="${exIndex}" data-round="${roundIndex}">Runde löschen</button>
+        </div>`).join("");
+      return `<div class="muted-block">Fixe Felder für gerade / links / rechts. Genau passend zu Ihrer Notizlogik.</div><div class="buttons" style="margin:8px 0 10px;"><button class="ghost" data-action="addRound" data-index="${exIndex}">Runde hinzufügen</button></div>${roundsHtml}`;
+    }
+    function syncWorkoutMeta(){ currentWorkout.date=document.getElementById("workoutDate").value; currentWorkout.note=document.getElementById("sessionNote").value.trim(); }
+    function cleanExercise(ex){
+      if(ex.type==="weighted_sets") return {...ex, sets:ex.sets.filter(s=>s.reps||s.weight)};
+      if(ex.type==="simple_reps") return {...ex, sets:ex.sets.filter(s=>s.reps)};
+      if(ex.type==="pullups_tabs") return {...ex, tabs:{ breit:(ex.tabs.breit||[]).filter(s=>s.reps), eng:(ex.tabs.eng||[]).filter(s=>s.reps) }};
+      if(ex.type==="situps_fixed") return {...ex, rounds:ex.rounds.filter(r=>r.gerade||r.links||r.rechts)};
+      return ex;
+    }
+    function saveWorkout(){
+      syncWorkoutMeta();
+      const cleanedExercises=currentWorkout.exercises.map(cleanExercise);
+      if(!cleanedExercises.some(exerciseHasData)){ alert("Bitte zuerst mindestens einen Satz eintragen."); return; }
+      const workout={date:currentWorkout.date, note:currentWorkout.note, exercises:cleanedExercises};
+      db.workouts=db.workouts.filter(w=>w.date!==workout.date);
+      db.workouts.push(workout);
+      db.workouts.sort((a,b)=>b.date.localeCompare(a.date));
+      saveDb(); renderHistory(); renderExercises(); alert("Training gespeichert.");
+    }
+    function renderHistory(){
+      const history=document.getElementById("history"); history.innerHTML="";
+      if(!db.workouts.length){ history.innerHTML='<div class="history-item"><div class="tiny">Noch keine gespeicherten Einheiten.</div></div>'; return; }
+      getSavedWorkoutsSortedDesc().forEach(workout=>{
+        const div=document.createElement("div"); div.className="history-item";
+        const lines=workout.exercises.filter(exerciseHasData).map(ex=>`<div class="history-line"><strong>${escapeHtml(ex.name)}:</strong> ${summarizeExercise(ex)}</div>`).join("");
+        div.innerHTML=`<div class="history-date">${formatDate(workout.date)}</div>${workout.note ? `<div class="history-line"><em>${escapeHtml(workout.note)}</em></div>` : ""}${lines}`;
+        history.appendChild(div);
+      });
+    }
+    function addSet(exIndex){ const ex=currentWorkout.exercises[exIndex]; if(ex.type==="weighted_sets") ex.sets.push({reps:"",weight:""}); if(ex.type==="simple_reps") ex.sets.push({reps:""}); renderExerciseBody(exIndex); }
+    function removeSet(exIndex, setIndex){ const ex=currentWorkout.exercises[exIndex]; if(!ex.sets) return; if(ex.sets.length===1) ex.sets[0]=ex.type==="weighted_sets"?{reps:"",weight:""}:{reps:""}; else ex.sets.splice(setIndex,1); renderExerciseBody(exIndex); renderExercises(); }
+    function addPullupSet(exIndex, tab){ currentWorkout.exercises[exIndex].tabs[tab].push({reps:""}); renderExerciseBody(exIndex); }
+    function removePullupSet(exIndex, tab, setIndex){ const arr=currentWorkout.exercises[exIndex].tabs[tab]; if(arr.length===1) arr[0]={reps:""}; else arr.splice(setIndex,1); renderExerciseBody(exIndex); renderExercises(); }
+    function addRound(exIndex){ currentWorkout.exercises[exIndex].rounds.push({gerade:"",links:"",rechts:""}); renderExerciseBody(exIndex); }
+    function removeRound(exIndex, roundIndex){ const rounds=currentWorkout.exercises[exIndex].rounds; if(rounds.length===1) rounds[0]={gerade:"",links:"",rechts:""}; else rounds.splice(roundIndex,1); renderExerciseBody(exIndex); renderExercises(); }
+    function copyLast(exIndex){ const ex=currentWorkout.exercises[exIndex]; const last=getLastExerciseEntry(ex.id); if(!last){ alert("Für diese Übung gibt es noch keine frühere Einheit."); return; } currentWorkout.exercises[exIndex]=JSON.parse(JSON.stringify({...last.exercise, activeTab:ex.activeTab || "breit"})); renderExercises(); }
+    function copyWholeLastWorkout(){ const lastWorkout=getSavedWorkoutsSortedDesc()[0]; if(!lastWorkout){ alert("Noch keine frühere Einheit vorhanden."); return; } currentWorkout.exercises=exerciseTemplates.map(template=>{ const found=lastWorkout.exercises.find(e=>e.id===template.id); return found ? JSON.parse(JSON.stringify({...found, activeTab:found.activeTab || (template.type==="pullups_tabs" ? "breit" : undefined)})) : createExerciseState(template); }); renderExercises(); }
+    function resetWorkout(){ if(!confirm("Heutige Eingaben wirklich leeren?")) return; currentWorkout=createEmptyWorkout(); document.getElementById("workoutDate").value=currentWorkout.date; document.getElementById("sessionNote").value=""; renderExercises(); }
+    function exportJson(){ const blob=new Blob([JSON.stringify(db,null,2)], {type:"application/json"}); downloadBlob(blob, `krafttraining-backup-${todayISO()}.json`); }
+    function exportCsv(){
+      const rows=[["Datum","Einheitsnotiz","Übung","Bereich","Satz_Runde","Gewicht_kg","Wiederholungen"]];
+      db.workouts.sort((a,b)=>a.date.localeCompare(b.date)).forEach(w=>{ w.exercises.forEach(ex=>{
+        if(ex.type==="weighted_sets") ex.sets.forEach((s,i)=>rows.push([w.date,w.note||"",ex.name,"",String(i+1),s.weight||"",s.reps||""]));
+        if(ex.type==="simple_reps") ex.sets.forEach((s,i)=>rows.push([w.date,w.note||"",ex.name,"",String(i+1),"",s.reps||""]));
+        if(ex.type==="pullups_tabs") ["breit","eng"].forEach(tab=>(ex.tabs?.[tab]||[]).forEach((s,i)=>rows.push([w.date,w.note||"",ex.name,tab,String(i+1),"",s.reps||""])));
+        if(ex.type==="situps_fixed") ex.rounds.forEach((r,i)=>{ rows.push([w.date,w.note||"",ex.name,"gerade",String(i+1),"",r.gerade||""]); rows.push([w.date,w.note||"",ex.name,"links",String(i+1),"",r.links||""]); rows.push([w.date,w.note||"",ex.name,"rechts",String(i+1),"",r.rechts||""]); });
+      }); });
+      const csv=rows.map(r=>r.map(csvEscape).join(";")).join("\n");
+      const blob=new Blob([csv], {type:"text/csv;charset=utf-8;"}); downloadBlob(blob, `krafttraining-export-${todayISO()}.csv`);
+    }
+    function csvEscape(value){ const v=String(value ?? ""); if(/[";\n]/.test(v)) return '"' + v.replace(/"/g,'""') + '"'; return v; }
+    function downloadBlob(blob, filename){ const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+    function importJson(file){ const reader=new FileReader(); reader.onload=e=>{ try{ const imported=JSON.parse(e.target.result); if(!imported || !Array.isArray(imported.workouts)) throw new Error("Ungültiges Format"); db=imported; saveDb(); renderHistory(); renderExercises(); alert("Import erfolgreich."); } catch(err){ alert("Import fehlgeschlagen. Bitte eine gültige JSON-Datei verwenden."); } }; reader.readAsText(file); }
+    document.addEventListener("input", e=>{
+      const kind=e.target.dataset.kind; if(!kind) return;
+      const exIndex=Number(e.target.dataset.ex); const field=e.target.dataset.field; const value=e.target.value; const ex=currentWorkout.exercises[exIndex];
+      if(kind==="weighted_sets"||kind==="simple_reps"){ const setIndex=Number(e.target.dataset.set); ex.sets[setIndex][field]=value; }
+      if(kind==="pullups_tabs"){ const setIndex=Number(e.target.dataset.set); const tab=e.target.dataset.tab; ex.tabs[tab][setIndex][field]=value; }
+      if(kind==="situps_fixed"){ const roundIndex=Number(e.target.dataset.round); ex.rounds[roundIndex][field]=value; }
+      renderExercises();
+    });
+    document.addEventListener("click", e=>{
+      const action=e.target.dataset.action; if(!action) return;
+      if(action==="addSet") addSet(Number(e.target.dataset.index));
+      if(action==="removeSet") removeSet(Number(e.target.dataset.ex), Number(e.target.dataset.set));
+      if(action==="copyLast") copyLast(Number(e.target.dataset.index));
+      if(action==="switchTab"){ const exIndex=Number(e.target.dataset.ex); currentWorkout.exercises[exIndex].activeTab=e.target.dataset.tab; renderExerciseBody(exIndex); renderExercises(); }
+      if(action==="addPullupSet") addPullupSet(Number(e.target.dataset.index), e.target.dataset.tab);
+      if(action==="removePullupSet") removePullupSet(Number(e.target.dataset.ex), e.target.dataset.tab, Number(e.target.dataset.set));
+      if(action==="addRound") addRound(Number(e.target.dataset.index));
+      if(action==="removeRound") removeRound(Number(e.target.dataset.ex), Number(e.target.dataset.round));
+    });
+    document.getElementById("saveWorkoutBtn").addEventListener("click", saveWorkout);
+    document.getElementById("copyWholeLastBtn").addEventListener("click", copyWholeLastWorkout);
+    document.getElementById("resetWorkoutBtn").addEventListener("click", resetWorkout);
+    document.getElementById("exportJsonBtn").addEventListener("click", exportJson);
+    document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
+    document.getElementById("importBtn").addEventListener("click", ()=>document.getElementById("importFile").click());
+    document.getElementById("importFile").addEventListener("change", e=>{ const file=e.target.files[0]; if(file) importJson(file); e.target.value=""; });
+    document.getElementById("workoutDate").value=currentWorkout.date;
+    document.getElementById("sessionNote").value=currentWorkout.note;
+    renderExercises(); renderHistory(); saveDb();
+  </script>
+</body>
+</html>
