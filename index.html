@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Krafttraining V5.0.4-dev</title>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Krafttraining V5.0.5-dev</title>
 <style>
 :root{--b:#f3f4f6;--c:#fff;--t:#1f2937;--m:#6b7280;--l:#e5e7eb;--a:#2563eb;--d:#dc2626;--s:0 10px 24px #0001}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--b);color:var(--t)}.w{max-width:820px;margin:auto;padding:14px 12px 90px}.p,.card,.modalbox{background:var(--c);border:1px solid var(--l);border-radius:18px;box-shadow:var(--s);padding:14px;margin-bottom:12px}h1{font-size:1.5rem;margin:0 0 4px}.muted{color:var(--m);font-size:.9rem}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}label{display:block;color:var(--m);font-size:.82rem;font-weight:700;margin-bottom:5px}input,textarea,button,select{font:inherit}input,textarea,select{width:100%;border:1px solid var(--l);border-radius:12px;padding:11px;background:#fff}textarea{min-height:68px}.btns{display:flex;flex-wrap:wrap;gap:7px}button{border:0;border-radius:12px;padding:10px 12px;font-weight:800}.pri{background:var(--a);color:#fff}.sec{background:#eef2ff;color:#3730a3}.ghost{background:#f9fafb;border:1px solid var(--l)}.danger{background:#fef2f2;color:var(--d)}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.addbtn{text-align:left;background:#f8fafc;border:1px solid var(--l)}.added{opacity:.45}.list{display:grid;gap:10px}.empty{text-align:center;padding:20px;color:var(--m);border:1px dashed #cbd5e1;border-radius:14px}.head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.title{font-weight:900}.exercise-titlebar{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.collapsebtn{flex:0 0 44px;width:44px;height:44px;padding:0;font-size:1.55rem;line-height:1;background:#f8fafc;border:1px solid var(--l);color:var(--a)}.collapsed-card{padding-bottom:14px}.sets{margin-top:10px}.set{display:grid;grid-template-columns:58px 1fr 1fr auto;gap:7px;align-items:end;margin-bottom:7px}.last{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:9px;margin-top:9px;font-size:.88rem}.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.cat{margin-bottom:9px}.cat>button{width:100%;display:flex;justify-content:space-between;background:#f8fafc;border:1px solid var(--l)}.catbody{display:none;padding-top:7px}.cat.open .catbody{display:block}.modal{position:fixed;inset:0;background:#0f172a88;display:none;align-items:flex-end;justify-content:center;padding:10px;z-index:9}.modal.open{display:flex}.modalbox{width:min(820px,100%);max-height:88vh;overflow:auto;margin:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.calhead{display:flex;justify-content:space-between;align-items:center}.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px}.dow{text-align:center;font-size:.75rem;color:var(--m);font-weight:800}.day{min-height:44px;background:#fff;border:1px solid var(--l);position:relative}.day.has{background:#eff6ff;border-color:#93c5fd}.dot{position:absolute;right:5px;bottom:5px;width:7px;height:7px;border-radius:50%;background:var(--a)}.searchbox{position:sticky;top:-14px;background:var(--c);padding:10px 0 8px;z-index:2}.sectiontitle{font-weight:900;margin:12px 0 7px}.searchmeta{margin:8px 0}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(18px);background:#111827;color:#fff;padding:11px 15px;border-radius:12px;box-shadow:var(--s);opacity:0;pointer-events:none;transition:.2s;z-index:30;text-align:center;max-width:calc(100% - 28px)}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media(max-width:600px){.row,.grid{grid-template-columns:1fr}.btns{display:grid}.head{flex-direction:column}.tri{grid-template-columns:1fr}}
@@ -11,7 +11,7 @@
 .readiness{margin-top:12px}.readiness-options{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;margin:8px 0}.readiness-choice{padding:8px 2px;border:2px solid transparent;background:var(--rc);color:#17202a;min-height:76px}.readiness-choice span{display:block;font-size:.64rem;overflow-wrap:anywhere;margin-top:3px}.readiness-choice[aria-pressed="true"]{border-color:#17202a;box-shadow:0 0 0 2px white,0 0 0 4px #2563eb}.readiness-choice:focus-visible{outline:3px solid #2563eb;outline-offset:2px}@media(max-width:600px){.readiness-options{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}}
 [hidden]{display:none!important}#plausibility{border:1px solid var(--l);border-radius:18px;padding:20px;width:min(520px,calc(100% - 24px));color:var(--t);box-shadow:var(--s)}#plausibility::backdrop{background:#0f172a88}#plausibilitytext{white-space:pre-line;line-height:1.5}
 </style></head><body><div class="w">
-<div class="p"><h1>Krafttraining Tracker V5.0.4-dev</h1><div class="muted">Bibliothek · Favoriten · freie Reihenfolge · Kalender · V3-Import</div></div>
+<div class="p"><h1>Krafttraining Tracker V5.0.5-dev</h1><div class="muted">Bibliothek · Favoriten · freie Reihenfolge · Kalender · V3-Import</div></div>
 <div class="p"><b>Aktuelle Einheit</b><div class="row" style="margin-top:9px"><div><label>Datum</label><input id="date" type="date"></div><div><label>Training / Vorlage</label><select id="trainingtype"></select></div></div><div id="customnamewrap" style="margin-top:9px"><label>Name der individuellen Einheit</label><input id="trainingname" placeholder="z. B. Ganzkörper oder Hotel Gym"></div><div id="readiness" class="readiness"></div><div class="readiness"><label for="trainingblock"><b>Trainingsblock</b></label><select id="trainingblock"><option value="">Noch nicht ausgewählt</option><option value="hypertrophy">Hypertrophie</option><option value="strength">Kraft</option><option value="intensity">Intensität</option><option value="deload">Deload</option></select><div id="trainingblockinfo" class="historymeta" aria-live="polite" hidden></div></div><div class="startdetails"><div><label>Warm-up</label><input id="warmup" placeholder="z. B. Seilspringen"></div><div class="bodymetrics"><div><label for="bodyweight">Körpergewicht (kg)</label><input id="bodyweight" type="number" min="0" step="0.1" inputmode="decimal" placeholder="z. B. 82,4"></div><div><label for="bodyfat">Körperfett (%)</label><input id="bodyfat" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="z. B. 18,5" aria-describedby="bodyfat-hint"><span id="bodyfat-hint" class="muted">Optional</span></div></div><div><label>Startzeit</label><input id="starttime" type="time"></div></div><div class="btns" style="margin-top:9px"><button class="pri" id="starttraining">▶ Training starten</button><button class="sec" id="openlib">+ Übung hinzufügen</button><button class="ghost" id="clear">Einheit leeren</button></div><div id="finishblock" class="finishblock"><div class="row"><div><label>Cool-down</label><input id="cooldown" placeholder="z. B. Stretching"></div><div><label>Endzeit</label><input id="endtime" type="time"></div></div><div id="duration" class="durationbox">Trainingsdauer: –</div><label id="savetemplatewrap" class="addbtn templatesave"><input id="savetemplate" type="checkbox"> Diese individuelle Einheit als Vorlage speichern</label></div><div style="margin-top:9px"><label>Kommentar</label><input id="note" placeholder="z. B. gut erholt"></div><div class="btns" style="margin-top:9px"><button class="pri" id="save">Training beenden & speichern</button></div></div>
 <div class="p"><button type="button" id="favtoggle" class="ghost" aria-controls="favs" aria-expanded="true" style="width:100%;text-align:left">⭐ Favoriten <span id="favstate">−</span></button><div id="favs" class="grid" style="margin-top:8px"></div></div>
 <div id="workout" class="list"></div>
@@ -87,10 +87,24 @@ function renderTrainingBlock(){
  let b=TRAINING_BLOCKS[block],days=blockDays(db.draft.trainingBlockStartDate);
  info.innerHTML=`<div><b>Ziel:</b> ${b.goal}</div><div><b>Empfohlener Wiederholungsbereich:</b> ${b.reps}</div><div><b>Empfohlener RIR:</b> ${b.rir}</div><div><b>Empfohlene Satzpause:</b> ${b.rest}</div><div class="muted" style="margin-top:7px">Nur als Orientierung – Übungen und Sätze bleiben unverändert.</div><div style="margin-top:7px">Seit ${days} ${days===1?'Tag':'Tagen'} im ${b.name}-Block</div>${days>TRAINING_BLOCK_WEEKS*7?'<div style="margin-top:7px">💡 Viele Trainingspläne wechseln nach 4–8 Wochen den Schwerpunkt. Falls Ihr Fortschritt stagniert, könnte ein Wechsel des Trainingsblocks sinnvoll sein.</div>':''}`;
 }
+// Local persistence errors must never be classified as cloud quota errors.
+function storageError(error,operation){const e=new Error(operation);e.name='LocalStorageError';e.cause=error;e.localStorage=true;e.quota=error?.name==='QuotaExceededError'||error?.name==='NS_ERROR_DOM_QUOTA_REACHED'||error?.code===22||error?.code===1014;return e}
+function storeLocal(key,value){try{localStorage.setItem(key,value)}catch(e){throw storageError(e,'Lokales Speichern fehlgeschlagen.')}}
+function draftHasProgress(w,library){
+ if(((!w.templateId||w.templateId==='individual')&&(w.ex?.length||w.trainingName))||w.started||w.note||w.warmup||w.bodyWeight||w.bodyFat||w.startTime||w.cooldown||w.endTime||w.durationMinutes!=null||w.saveTemplate||readinessValue(w.readiness)!==null)return true;
+ if(w.trainingName&&w.trainingName!==(DEFAULT_TEMPLATES.find(t=>t.id===w.templateId)?.name||'')&&(!w.templateId||w.templateId==='individual'))return true;
+ return (w.ex||[]).some(e=>e.comment||(e.sets||[]).some(set=>Object.entries(set).some(([k,v])=>v!==''&&v!=null&&(k!=='weight'||String(v)!==String(library.find(l=>l.id===e.exerciseId)?.defaultWeight??'')))));
+}
+function cleanDraftEntries(w,library){
+ // Preserve standalone exercises and all recorded data; drop only empty shells.
+ w.ex=(Array.isArray(w.ex)?w.ex:[]).filter(e=>e&&typeof e==='object'&&!Array.isArray(e)).filter(e=>e.exerciseId||e.name||e.comment||(Array.isArray(e.sets)&&e.sets.some(s=>s&&Object.values(s).some(v=>v!==''&&v!=null))));
+ w.ex.forEach(e=>{let lib=library.find(l=>l.id===e.exerciseId);e.name=e.name||lib?.name||'Unbekannte Übung';e.sets=Array.isArray(e.sets)?e.sets.filter(s=>s&&typeof s==='object'):[]});
+ return w;
+}
 function normWorkout(w={},draft=false){w.date=w.date||today();w.note=w.note||'';w.ex=w.ex||[];w.templateId=w.templateId??(draft?'individual':'');w.trainingName=w.trainingName||'';w.warmup=w.warmup||'';w.bodyWeight=w.bodyWeight===null||w.bodyWeight===undefined?'':String(w.bodyWeight);w.bodyFat=w.bodyFat===null||w.bodyFat===undefined?'':String(w.bodyFat);w.startTime=w.startTime||'';w.started=!!w.started;w.cooldown=w.cooldown||'';w.endTime=w.endTime||'';w.durationMinutes=w.durationMinutes!==null&&w.durationMinutes!==''&&Number.isFinite(+w.durationMinutes)?+w.durationMinutes:null;w.saveTemplate=!!w.saveTemplate;w.readiness=readinessValue(w.readiness);w.trainingBlock=blockValue(w.trainingBlock);w.trainingBlockStartDate=w.trainingBlock?blockDate(w.trainingBlockStartDate):null;return w}
-function normalizeDB(x){x.library=(x.library||cp(START)).map(normLib);x.templates=(x.templates||[]).map(normTemplate);x.history=(x.history||[]).map(w=>normWorkout(w));x.draft=normWorkout(x.draft||{date:today(),note:"",ex:[]},true);normalizeTrainingBlock(x);[...x.history,x.draft].forEach(w=>(w.ex||[]).forEach(e=>{e.id=e.id||'s'+Date.now()+Math.random();let l=x.library.find(a=>a.id===e.exerciseId);e.s=e.s??l?.s??null;e.w=e.w??l?.w??false;e.reps=e.reps??l?.reps??true;e.bodyweight=e.bodyweight??l?.bodyweight??false;e.extraWeight=e.extraWeight??l?.extraWeight??false;e.collapsed=!!e.collapsed;e.sets=(e.sets||[]).map(s=>normSet(e,s));if(!e.sets.length)e.sets=[normSet(e)]}));return x}
+function normalizeDB(x){x.library=(x.library||cp(START)).map(normLib);x.templates=(x.templates||[]).map(normTemplate);x.history=(x.history||[]).map(w=>normWorkout(w));x.draft=normWorkout(x.draft||{date:today(),note:"",ex:[]},true);cleanDraftEntries(x.draft,x.library);normalizeTrainingBlock(x);[...x.history,x.draft].forEach(w=>(w.ex||[]).forEach(e=>{e.id=e.id||'s'+Date.now()+Math.random();let l=x.library.find(a=>a.id===e.exerciseId);e.s=e.s??l?.s??null;e.w=e.w??l?.w??false;e.reps=e.reps??l?.reps??true;e.bodyweight=e.bodyweight??l?.bodyweight??false;e.extraWeight=e.extraWeight??l?.extraWeight??false;e.collapsed=!!e.collapsed;e.sets=(e.sets||[]).map(s=>normSet(e,s));if(!e.sets.length)e.sets=[normSet(e)]}));return x}
 function load(){try{let x=JSON.parse(localStorage.getItem(K));if(x.library&&x.history)return normalizeDB(x)}catch{}return normalizeDB({library:cp(START),history:[],draft:{date:today(),note:"",ex:[]}})}
-let db=load(),cursor=new Date(),sel=null,editId=null,showArchived=false,addAfterSave=false,replaceTarget=null;const saveDB=()=>{localStorage.setItem(K,JSON.stringify(db));window.dispatchEvent(new Event("tracker-saved"))},byid=id=>db.library.find(x=>x.id===id),has=id=>db.draft.ex.some(x=>x.exerciseId===id);
+let db=load(),cursor=new Date(),sel=null,editId=null,showArchived=false,addAfterSave=false,replaceTarget=null;const saveDB=()=>{try{storeLocal(K,JSON.stringify(db))}catch(e){render();throw e}window.dispatchEvent(new Event("tracker-saved"))},byid=id=>db.library.find(x=>x.id===id),has=id=>db.draft.ex.some(x=>x.exerciseId===id);
 
 // Only an untouched, empty draft gets today's date. Never reset training content.
 function hasRunningDraft(w){return !!(w.started||w.ex?.length||w.note||w.trainingName||w.warmup||w.bodyWeight||w.bodyFat||w.startTime||w.cooldown||w.endTime||w.durationMinutes!==null&&w.durationMinutes!==undefined||w.saveTemplate||readinessValue(w.readiness)!==null||w.templateId&&w.templateId!=='individual')}
@@ -171,9 +185,9 @@ function timeNow(){let d=new Date();return`${String(d.getHours()).padStart(2,'0'
 function calcDuration(start,end){if(!start||!end)return null;let[a,b]=start.split(':').map(Number),[c,d]=end.split(':').map(Number),n=c*60+d-(a*60+b);return n<0?n+1440:n}
 function durationText(n){if(n===null||n===undefined)return'Trainingsdauer: –';let h=Math.floor(n/60),m=n%60;return`Trainingsdauer: ${h?h+' h ':''}${m} min`}
 function templateById(id){return DEFAULT_TEMPLATES.find(t=>t.id===id)||db.templates.find(t=>t.id===id)}
-function templateExerciseIds(id){let recent=[...db.history].sort((a,b)=>b.date.localeCompare(a.date)).find(w=>w.templateId===id&&w.ex?.length);return recent?recent.ex.map(e=>e.exerciseId):(templateById(id)?.exerciseIds||[])}
+function templateExerciseIds(id){let recent=[...db.history].sort((a,b)=>b.date.localeCompare(a.date)).find(w=>w.templateId===id&&w.ex?.length);let ids=(recent?recent.ex.map(e=>e.exerciseId):[]).filter(id=>byid(id)&&!byid(id).archived);return [...new Set(ids.length?ids:(templateById(id)?.exerciseIds||[]))]}
 function freshDraft(){return normWorkout({date:today(),note:'',ex:[],templateId:'individual',...db.activeTrainingBlock},true)}
-function applyTemplate(id){if(db.draft.ex.length&&!confirm('Die aktuelle Übungsauswahl durch diese Vorlage ersetzen?')){renderSession();return false}db.draft.templateId=id;db.draft.trainingName=id==='individual'?'':(templateById(id)?.name||'');db.draft.ex=id==='individual'?[]:templateExerciseIds(id).map(byid).filter(x=>x&&!x.archived).map(mk);db.draft.started=false;db.draft.startTime='';db.draft.cooldown='';db.draft.endTime='';db.draft.durationMinutes=null;db.draft.saveTemplate=false;saveDB();render();return true}
+function applyTemplate(id){if(hasRunningDraft(db.draft)&&!confirm('Die aktuelle Übungsauswahl durch diese Vorlage ersetzen?')){renderSession();return false}db.draft.templateId=id;db.draft.trainingName=id==='individual'?'':(templateById(id)?.name||'');db.draft.ex=id==='individual'?[]:templateExerciseIds(id).map(byid).filter(x=>x&&!x.archived).map(mk);db.draft.started=false;db.draft.startTime='';db.draft.cooldown='';db.draft.endTime='';db.draft.durationMinutes=null;db.draft.saveTemplate=false;saveDB();render();return true}
 function renderSession(){renderReadiness();renderTrainingBlock();let options=[...DEFAULT_TEMPLATES,...db.templates];trainingtype.innerHTML=options.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('')+'<option value="individual">Individuelle Einheit</option>';if(![...options.map(t=>t.id),'individual'].includes(db.draft.templateId))db.draft.templateId='individual';trainingtype.value=db.draft.templateId;trainingtype.disabled=db.draft.started;customnamewrap.style.display=db.draft.templateId==='individual'?'block':'none';trainingname.value=db.draft.trainingName||'';warmup.value=db.draft.warmup||'';bodyweight.value=db.draft.bodyWeight||'';document.getElementById('bodyfat').value=db.draft.bodyFat??'';starttime.value=db.draft.startTime||'';cooldown.value=db.draft.cooldown||'';endtime.value=db.draft.endTime||'';savetemplate.checked=!!db.draft.saveTemplate;savetemplatewrap.style.display=db.draft.templateId==='individual'?'block':'none';finishblock.classList.toggle('open',db.draft.started);starttraining.textContent=db.draft.started?'✓ Training läuft':'▶ Training starten';starttraining.classList.toggle('running',db.draft.started);duration.textContent=durationText(db.draft.durationMinutes)}
 function fmt(e){if(e.s==="tri")return e.sets.map((s,i)=>`R${i+1}: G1 ${s.straightStart||"–"}${e.extraWeight&&s.straightStartExtraWeight!==""?` (+${s.straightStartExtraWeight} kg)`:""} · L ${s.left||"–"}${e.extraWeight&&s.leftExtraWeight!==""?` (+${s.leftExtraWeight} kg)`:""} · R ${s.right||"–"}${e.extraWeight&&s.rightExtraWeight!==""?` (+${s.rightExtraWeight} kg)`:""} · G2 ${s.straightEnd||"–"}${e.extraWeight&&s.straightEndExtraWeight!==""?` (+${s.straightEndExtraWeight} kg)`:""}`).join("<br>");if(e.s==="time")return e.sets.map((s,i)=>`R${i+1}: ${s.time||"–"} Sek.`).join("<br>");return e.sets.map((s,i)=>`S${i+1}: ${e.w&&s.weight!==""?s.weight+" kg · ":""}${e.reps!==false?(s.reps||"–")+" Wdh.":""}${e.extraWeight&&s.extraWeight!==""?" · +"+s.extraWeight+" kg extra":""}`).join("<br>")}
 function fmtChoice(e){if(e.s==='tri')return e.sets.map(s=>`G1 ${s.straightStart||'–'}${e.extraWeight&&s.straightStartExtraWeight!==''?' (+'+s.straightStartExtraWeight+' kg)':''} / L ${s.left||'–'}${e.extraWeight&&s.leftExtraWeight!==''?' (+'+s.leftExtraWeight+' kg)':''} / R ${s.right||'–'}${e.extraWeight&&s.rightExtraWeight!==''?' (+'+s.rightExtraWeight+' kg)':''} / G2 ${s.straightEnd||'–'}${e.extraWeight&&s.straightEndExtraWeight!==''?' (+'+s.straightEndExtraWeight+' kg)':''}`).join(' · ');if(e.s==='time')return e.sets.map(s=>s.time||'–').join(' / ')+' Sek.';return e.sets.map(s=>`${e.w?(s.weight||'–')+' kg · ':''}${e.reps!==false?(s.reps||'–')+' Wdh.':''}${e.extraWeight&&s.extraWeight!==''?' · +'+s.extraWeight+' kg extra':''}`).join(' | ')}
@@ -224,15 +238,60 @@ const SUPABASE_ANON_KEY = 'sb_publishable_KfNMibOzInKoqOf0Snyj1Q_Xzp_O8rZ';
  const configured=SUPABASE_URL.startsWith('https://')&&!SUPABASE_ANON_KEY.startsWith('YOUR_');
  function persistDirty(value){dirty=!!value;try{localStorage.setItem(dirtyKey,String(dirty))}catch{}}
  function localChanged(){if(dirty)return true;if(!user||meta.user!==user.id||typeof meta.base!=='string')return true;return canonical(db)!==meta.base}
- function remember(row,state){meta={user:user.id,version:row.version,base:canonical(state),updated_at:row.updated_at,lastSyncedAt:new Date().toISOString()};localStorage.setItem(metaKey,JSON.stringify(meta));persistDirty(false)}
+ function remember(row,state){const nextMeta={user:user.id,version:row.version,base:canonical(state),updated_at:row.updated_at,lastSyncedAt:new Date().toISOString()};storeLocal(metaKey,JSON.stringify(nextMeta));meta=nextMeta;persistDirty(false)}
  function markDirty(){persistDirty(true);if(user&&!pending)status('Verbunden – lokale Änderungen vorhanden. Noch nicht synchronisiert.')}
  function conflict(row){pending={row,local:canonical(db)};$('conflict').hidden=false;$('cloud').hidden=!row;status('Verbunden – Auswahl erforderlich.');$('conflict-text').textContent=row?'Lokaler und Cloud-Stand unterscheiden sich. Cloud-Version '+row.version+' vom '+row.updated_at+'. Bitte prüfe beide Stände und wähle bewusst.':'Die Cloud ist leer. Lokale Daten können jetzt erstmals hochgeladen werden.';}
- function archive(row){const backup={saved_at:new Date().toISOString(),local:cp(db),cloud:row?.state??null,cloud_version:row?.version??null};localStorage.setItem(K+'_sync_recovery_'+Date.now(),JSON.stringify(backup));return backup}
+ const recoveryPrefix=K+'_sync_recovery_';
+ function pruneRecovery(keep=3){
+  try{const keys=[];for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key?.startsWith(recoveryPrefix))keys.push(key)}
+   keys.sort((a,b)=>(Number(b.slice(recoveryPrefix.length).split('_')[0])||0)-(Number(a.slice(recoveryPrefix.length).split('_')[0])||0)||b.localeCompare(a));
+   keys.slice(keep).forEach(key=>localStorage.removeItem(key));
+  }catch(e){throw storageError(e,'Lokale Sync-Sicherungen konnten nicht bereinigt werden.')}
+ }
+ function archive(row){
+  const backup={saved_at:new Date().toISOString(),local:cp(db),cloud:row?.state??null,cloud_version:row?.version??null};
+  try{pruneRecovery(2);storeLocal(recoveryPrefix+Date.now()+'_'+Math.random().toString(36).slice(2),JSON.stringify(backup))}
+  catch(e){if(e.localStorage){e.recovery=true;throw e}throw storageError(e,'Recovery-Backup konnte nicht gespeichert werden.')}
+  return backup;
+ }
+ function cloudState(state){
+  const next=normalizeDB(cp(state)),w=next.draft;
+  if(!draftHasProgress(w,next.library)){
+   // An unused remote selection is a template, not a foreign running session.
+   const template=DEFAULT_TEMPLATES.find(t=>t.id===w.templateId)||next.templates.find(t=>t.id===w.templateId);
+   const recent=[...next.history].sort((a,b)=>b.date.localeCompare(a.date)).find(h=>h.templateId===w.templateId&&h.ex?.length);
+   let ids=(recent?.ex||[]).map(e=>e.exerciseId).filter(id=>next.library.some(l=>l.id===id&&!l.archived));
+   if(!ids.length)ids=template?.exerciseIds||[];
+   next.draft=normWorkout({date:today(),templateId:template?.id||'individual',trainingName:template?.name||'',ex:template?[...new Set(ids)].map(id=>next.library.find(l=>l.id===id&&!l.archived)).filter(Boolean).map(mk):[],...next.activeTrainingBlock},true);
+  }
+  return next;
+ }
+ function adoptCloud(row){
+  const next=cloudState(row.state);
+  storeLocal(K,JSON.stringify(next));db=next;replaceTarget=null;
+  // Refresh every draft-dependent view before fallible sync metadata writes.
+  render();remember(row,row.state);
+  if(canonical(next)!==canonical(row.state))persistDirty(true);
+  pending=null;$('conflict').hidden=true;
+ }
  function download(){const b={local:cp(db),cloud:pending?.row?.state??null};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(b,null,2)],{type:'application/json'}));a.download='krafttraining-sync-konflikt.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
  function valid(x){return x&&typeof x==='object'&&!Array.isArray(x)&&Array.isArray(x.library)&&Array.isArray(x.history)&&(!x.templates||Array.isArray(x.templates))&&(!x.draft||Array.isArray(x.draft.ex))}
- function quotaMessage(e){const m=String(e?.message||e||'').toLowerCase();return m.includes('quota')||m.includes('rate limit')||m.includes('too many requests')||m.includes('429')}
- function showError(e){if(quotaMessage(e))status('Cloud-Limit erreicht – lokale Daten bleiben sicher. Bitte später erneut synchronisieren.');else status('Fehler – '+(e?.message||String(e))+' Lokale Daten bleiben erhalten.');}
- async function fetchRow(uid){const {data:row,error}=await client.from('tracker_state').select('state,version,updated_at').eq('user_id',uid).maybeSingle();if(error)throw error;if(row&&!valid(row.state))throw Error('Ungültige Cloud-Daten. Lokaler Stand bleibt erhalten.');return row}
+ function showError(e){
+  const code=String(e?.code||''),http=Number(e?.status||e?.statusCode||0),message=String(e?.message||e||'');
+  if(e?.localStorage||e?.name==='QuotaExceededError'||e?.name==='NS_ERROR_DOM_QUOTA_REACHED'){
+   const full=e.quota||e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED';
+   status((full?'Lokaler Browserspeicher ist voll – kein Cloud-Limit. ':'Lokaler Browserspeicher ist nicht verfügbar. ')+(e.recovery?'Sync abgebrochen, weil die Sicherung nicht gespeichert werden konnte. Beide Stände bitte herunterladen. ':'Änderungen sind möglicherweise noch nicht vollständig lokal gespeichert. Bitte Backup exportieren. '));
+  }else if(http===429||/^(over_.*rate_limit|rate_limit_exceeded)$/.test(code))status('Cloud-Anfragelimit erreicht. Bitte später manuell synchronisieren.');
+  else if(e?.cloud&&(/quota|rate limit|too many requests/i.test(message)||http===402))status('Cloud-Limit erreicht. Bitte Cloud-Kontingent prüfen und später manuell synchronisieren.');
+  else if(http===401||http===403||/^Auth/.test(e?.name||'')||/^(PGRST30[123]|42501)$/.test(code))status('Anmeldung oder Cloud-Berechtigung fehlt. Bitte erneut anmelden und Zugriffsrechte prüfen.');
+  else if(http>=400)status('Cloud-Anfrage fehlgeschlagen (HTTP '+http+'). Bitte später manuell erneut versuchen.');
+  else if(e?.cloud)status('Cloud-Anfrage fehlgeschlagen. Bitte Verbindung und Cloud-Konfiguration prüfen.');
+  else status('App-Fehler: '+message+' Bitte Backup exportieren und die Seite neu laden.');
+ }
+ function cloudError(error,status){const e=new Error(error?.message||'Cloud-Anfrage fehlgeschlagen');e.name=error?.name||'CloudError';e.code=error?.code;e.status=error?.status||status;e.cloud=true;return e}
+ try{pruneRecovery()}catch(e){showError(e)}
+ window.addEventListener('error',event=>{if(event.error?.localStorage)showError(event.error)});
+ async function fetchRow(uid){const {data:row,error,status:http}=await client.from('tracker_state').select('state,version,updated_at').eq('user_id',uid).maybeSingle();if(error)throw cloudError(error,http);if(row&&!valid(row.state))throw Error('Ungültige Cloud-Daten. Lokaler Stand bleibt erhalten.');return row}
  async function sync(options={}){
   const {choice=null,allowPush=false,source='manual'}=options;
   if(!client||!user){status(configured?'Nur lokal – bitte anmelden.':'Nur lokal – zuerst SUPABASE_URL und SUPABASE_ANON_KEY konfigurieren.');return false}
@@ -248,21 +307,21 @@ const SUPABASE_ANON_KEY = 'sb_publishable_KfNMibOzInKoqOf0Snyj1Q_Xzp_O8rZ';
    const known=meta.user===uid&&Number.isInteger(meta.version)&&typeof meta.base==='string';
    if(choice==='cloud'){
     if(!row){status('Cloud ist leer – es gibt keinen Cloud-Stand zum Übernehmen.');return false}
-    archive(row);const next=normalizeDB(cp(row.state));current();localStorage.setItem(K,JSON.stringify(next));db=next;remember(row,row.state);pending=null;$('conflict').hidden=true;render();status('Synchronisiert · Cloud-Stand übernommen.');return true
+    if(hasRunningDraft(db.draft)&&canonical(db.draft)!==canonical(cloudState(row.state).draft)&&!confirm('Die lokale Einheit durch den Cloud-Stand ersetzen? Sie wird vorher als Recovery-Backup gesichert.'))return false;archive(row);current();adoptCloud(row);status('Synchronisiert · Cloud-Stand übernommen.');return true
    }
    if(choice==='local'){
-    archive(row);const {data,error}=await client.rpc('save_tracker_state',{p_state:snapshot,p_expected_version:row?.version??0});if(error)throw error;current();const saved=Array.isArray(data)?data[0]:data;if(!saved)throw Error('Keine Schreibbestätigung erhalten.');remember(saved,snapshot);pending=null;$('conflict').hidden=true;status('Synchronisiert · lokaler Stand in Cloud gespeichert.');return true
+    archive(row);const {data,error,status:http}=await client.rpc('save_tracker_state',{p_state:snapshot,p_expected_version:row?.version??0});if(error)throw cloudError(error,http);current();const saved=Array.isArray(data)?data[0]:data;if(!saved)throw Error('Keine Schreibbestätigung erhalten.');remember(saved,snapshot);pending=null;$('conflict').hidden=true;status('Synchronisiert · lokaler Stand in Cloud gespeichert.');return true
    }
    if(!row){conflict(null);return false}
    if(!known){conflict(row);return false}
    if(row.version!==meta.version){
-    if(local===meta.base){const next=normalizeDB(cp(row.state));localStorage.setItem(K,JSON.stringify(next));db=next;remember(row,row.state);pending=null;$('conflict').hidden=true;render();status('Synchronisiert · neuer Cloud-Stand übernommen.');return true}
+    if(local===meta.base&&!hasRunningDraft(db.draft)){adoptCloud(row);status('Synchronisiert · neuer Cloud-Stand übernommen.');return true}
     conflict(row);return false
    }
    if(local===meta.base){remember(row,snapshot);pending=null;$('conflict').hidden=true;status('Synchronisiert · keine Änderungen.');return true}
    persistDirty(true);
    if(!allowPush){status('Verbunden – lokale Änderungen vorhanden. Noch nicht synchronisiert.');return false}
-   const {data,error}=await client.rpc('save_tracker_state',{p_state:snapshot,p_expected_version:row.version});if(error)throw error;current();const saved=Array.isArray(data)?data[0]:data;if(!saved)throw Error('Keine Schreibbestätigung erhalten.');remember(saved,snapshot);pending=null;$('conflict').hidden=true;status('Synchronisiert · '+saved.updated_at);return true
+   const {data,error,status:http}=await client.rpc('save_tracker_state',{p_state:snapshot,p_expected_version:row.version});if(error)throw cloudError(error,http);current();const saved=Array.isArray(data)?data[0]:data;if(!saved)throw Error('Keine Schreibbestätigung erhalten.');remember(saved,snapshot);pending=null;$('conflict').hidden=true;status('Synchronisiert · '+saved.updated_at);return true
   }catch(e){showError(e);return false}
   finally{busy=false}
  }
@@ -311,4 +370,3 @@ const SUPABASE_ANON_KEY = 'sb_publishable_KfNMibOzInKoqOf0Snyj1Q_Xzp_O8rZ';
 })();
 
 </script></body></html>
-<!-- redeploy 2026-10-01 -->
